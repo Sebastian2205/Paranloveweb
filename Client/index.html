@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+    <link rel="stylesheet" href="./layout/style.css">
+    <title>ParanLove</title>
+</head>
+<body onload="legeAnzeigefest()">
+<script>
+    /**
+     * @author Jean-Philippe Laventure
+     * @description Prüft die Bildschirmgröße des Gerätes (Achtung: nicht die Fenstergröße, sondern die
+     * Bildschirmgröße wird abgefragt) und passt die Ansicht daran an.
+     */
+    function legeAnzeigefest()
+    {
+        const bildschirmgroesse =  window.screen.availWidth;
+
+        if (bildschirmgroesse < 800)
+        {
+            document.getElementById("mobil").hidden = false;
+            document.getElementById("desktop").hidden = true;
+        }
+        else
+        {
+            document.getElementById("desktop").hidden = false;
+            document.getElementById("mobil").hidden = true;
+        }
+    }
+</script>
+<div id="desktop" hidden>
+    <header id="info_header">
+        <label>ParanLove</label>
+    </header>
+    <div class="nutzerprofil">
+        <form class="new-entry" method="POST" action="/login">
+            <label for="username">Nutzername: </label>
+            <input type="text" name="username" id="username"/>
+            <br />
+            <label for="password">Passwort: </label>
+            <input type="password" name="password" id="password"/>
+            <br />
+            <input type="submit" value="Login"/>
+        </form>
+        <form method="get" action="/registrierung">
+            <input type="submit" value="Registrierung">
+        </form>
+    </div>
+</div>
+<div id="mobil" hidden>
+    <header id="info_header2">
+        <label style="font-size: 5vw">ParanLove</label>
+    </header>
+    <div class="nutzerprofil">
+        <form class="new-entry" method="POST" action="/login">
+            <label for="username">Nutzername: </label>
+            <input type="text" name="username" id="username2"/>
+            <br />
+            <label for="password">Passwort: </label>
+            <input type="password" name="password" id="password2"/>
+            <br />
+            <input type="submit" value="Login"/>
+        </form>
+        <form method="get" action="/registrierung">
+            <input type="submit" value="Registrierung">
+        </form>
+    </div>
+</div>
+</body>
+<footer>
+    <a href="hilfe" style="color: black">Hilfe</a>
+    <a href="info" style="color: black">Impressum</a>
+    <a href="info" style="color: black">Datenschutz</a>
+</footer>
+</html>

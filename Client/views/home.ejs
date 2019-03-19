@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+    <link rel="stylesheet" href="./layout/style.css">
+    <script type="text/javascript" src="Datum.js"></script>
+    <title>ParanLove - Home</title>
+</head>
+<body onload="ladeNutzer()">
+<% for(let entry of entries) { %>
+<script>
+        /**
+         * @author Jean-Philippe Laventure
+         * @description Prüft die Bildschirmgröße des Gerätes (Achtung: nicht die Fenstergröße, sondern die
+         * Bildschirmgröße wird abgefragt) und passt die Ansicht daran an.
+         */
+        function legeAnzeigefest() {
+            const bildschirmgroesse = window.screen.availWidth;
+
+            if (bildschirmgroesse < 800) {
+                document.getElementById("mobil").hidden = false;
+                document.getElementById("desktop").hidden = true;
+            }
+            else {
+                document.getElementById("desktop").hidden = false;
+                document.getElementById("mobil").hidden = true;
+            }
+        }
+
+        /**
+         * @author Jean-hilippe Laventure
+         * @description Lädt beim Betreten der Seite die mit dem Nutzer kompatiblen Profildaten.
+         */
+        function ladeNutzer() {
+            legeAnzeigefest();
+            document.getElementById("nav_home").style.backgroundColor = "white";
+            // FixMe: Lade Matching-Treffer
+        }
+
+        /**
+         * @author Jean-Philippe Laventure
+         * @description Funktion zum Anpassen der Anzeige (in der Desktop-Ansicht)
+         * @param {string} id_html ID eines der HTML-Elemente, dass zur Steuerung der Anicht benutzt wird.
+         */
+        function toogleVisualNavigator_Desktop(id_html) {
+            // Reset Anzeige der Tabs
+            document.getElementById("nav_home").style.backgroundColor = "#e70032";
+            document.getElementById("nav_profil").style.backgroundColor = "#e70032";
+            document.getElementById("nav_nachrichten").style.backgroundColor = "#e70032";
+            document.getElementById("nav_logout").style.backgroundColor = "#e70032";
+
+            // Markiere den ausgewählten (aktiven) Tab
+            document.getElementById(id_html).style.backgroundColor = "white";
+
+            // Reset Anzeige der Displayinhalte
+            document.getElementById("home").hidden = true;
+            document.getElementById("nutzerprofil").hidden = true;
+            document.getElementById("nachrichtensystem").hidden = true;
+            document.getElementById("logout").hidden = true;
+
+            // Decke den aktiven Displayinhalt auf
+            switch (id_html) {
+                case "nav_home":
+                    document.getElementById("home").hidden = false;
+                    break;
+                case "nav_profil":
+                    document.getElementById("nutzerprofil").hidden = false;
+                    break;
+                case "nav_nachrichten":
+                    document.getElementById("nachrichtensystem").hidden = false;
+                    break;
+                case "nav_logout":
+                    document.getElementById("logout").hidden = true;
+                    //Logout Funktion
+                    break;
+            }
+        }
+
+        /**
+         * @author Jean-Philippe Laventure
+         * @description Funktion zum Anpassen der Anzeige (in der Mobilen-Ansicht)
+         * @param {string} id_html ID eines der HTML-Elemente, dass zur Steuerung der Anicht benutzt wird.
+         */
+        function toogleVisualNavigator_Mobil(id_html) {
+            // Reset Anzeige der Tabs
+            document.getElementById("nav_home2").style.backgroundColor = "#e70032";
+            document.getElementById("nav_profil2").style.backgroundColor = "#e70032";
+            document.getElementById("nav_nachrichten2").style.backgroundColor = "#e70032";
+            document.getElementById("nav_logout2").style.backgroundColor = "#e70032";
+
+            // Markiere den ausgewählten (aktiven) Tab
+            document.getElementById(id_html).style.backgroundColor = "white";
+
+            // Reset Anzeige der Displayinhalte
+            document.getElementById("home2").hidden = true;
+            document.getElementById("nutzerprofil2").hidden = true;
+            document.getElementById("nachrichtensystem2").hidden = true;
+            document.getElementById("logout2").hidden = true;
+
+            // Decke den aktiven Displayinhalt auf
+            switch (id_html) {
+                case "nav_home2":
+                    document.getElementById("home2").hidden = false;
+                    break;
+                case "nav_profil2":
+                    document.getElementById("nutzerprofil2").hidden = false;
+                    break;
+                case "nav_nachrichten2":
+                    document.getElementById("nachrichtensystem2").hidden = false;
+                    break;
+                case "nav_logout2":
+                    document.getElementById("logout2").hidden = true;
+                    // Hier steht zukünftig eine Funktion zum Ausloggen
+                    break;
+            }
+        }
+
+        /**
+         * @author Jean-Philippe Laventure
+         * @description Aktualisiert die Anzeige der Matching-Treffer. (für die Desktop-Ansicht)
+         */
+        function aktualisiere() {
+            let t1 = true;
+            let treffer = [];
+            if (!document.getElementById("profil_match").hidden) {   // Zeige Suchergebnisse an
+                document.getElementById("profil_match").hidden = true;
+                document.getElementById("suchergebnisse").hidden = false;
+            }
+            while (t1)  // leere Tabelle (Ansicht der potenziellen Partner)
+            {
+                try {
+                    const t2 = document.getElementById("matches").deleteRow(1);
+                }
+                catch (e) {
+                    t1 = false;
+                }
+                if (t1) {
+                    document.getElementById("matches").deleteRow(1);
+                }
+            }
+
+            // Hier werden künftig die Profile der Matches aus der Datenbank in treffer gespeichert
+
+            for (let i = 0; i < treffer.length; i++) {
+                // Hier werden in Zukunft die Kurzinformationen der Matches aus treffer in die Anzeige übertragen
+            }
+        }
+
+        /**
+         * @author Jean-Philippe Laventure
+         * @description Aktualisiert die Anzeige der Matching-Treffer. (für die Mobile-Ansicht)
+         */
+        function aktualisiere2() {
+            let t1 = true;
+            let treffer = [];
+            if (!document.getElementById("profil_match2").hidden) {   // Zeige Suchergebnisse an
+                document.getElementById("profil_match2").hidden = true;
+                document.getElementById("suchergebnisse2").hidden = false;
+            }
+            while (t1)  // leere Tabelle (Ansicht der potenziellen Partner)
+            {
+                try {
+                    const t2 = document.getElementById("matches2").deleteRow(1);
+                }
+                catch (e) {
+                    t1 = false;
+                }
+                if (t1) {
+                    document.getElementById("matches2").deleteRow(1);
+                }
+            }
+
+            // Hier werden künftig die Profile der Matches aus der Datenbank in treffer gespeichert
+
+            for (let i = 0; i < treffer.length; i++) {
+                // Hier werden in Zukunft die Kurzinformationen der Matches aus treffer in die Anzeige übertragen
+            }
+        }
+
+        /**
+         * @author Jean-Philippe Laventure
+         * @description Fügt ein kompatibles Profil der Anzeige hinzu. (für die Desktop-Ansicht)
+         * @param {string} tabelle
+         * @param {string} nutzername
+         * @param {string} geschlecht
+         * @param {string} geburtstag
+         * @param {string} plz
+         * @param {string} auswertung
+         */
+        function addMatch(tabelle, nutzername, geschlecht, geburtstag, plz, auswertung) {
+            const zeile = document.getElementById(tabelle).insertRow(1);
+            let spalte1 = zeile.insertCell(0);
+            let spalte2 = zeile.insertCell(1);
+            let spalte3 = zeile.insertCell(2);
+            let spalte4 = zeile.insertCell(3);
+            spalte1.innerHTML = nutzername;
+            spalte2.innerHTML = geschlecht;
+            spalte3.innerHTML = geburtstag;
+            spalte4.innerHTML = plz;
+
+            if (auswertung === "gelb") {
+                zeile.style.backgroundColor = "yellow";
+            }
+            else {
+                zeile.style.backgroundColor = "green";
+                zeile.style.color = "white";
+            }
+    }
+</script>
+<div id="desktop" hidden>
+    <nav class="flex-container">    <!-- Navigator und Wrapper -->
+        <div  onclick="toogleVisualNavigator_Desktop('nav_home')" id="nav_home">
+            <label class="tabNavigator">Home</label>
+        </div>
+        <div onclick="toogleVisualNavigator_Desktop('nav_profil')" id="nav_profil">
+            <label class="tabNavigator">Profil bearbeiten</label>
+        </div>
+        <div onclick="toogleVisualNavigator_Desktop('nav_nachrichten')" id="nav_nachrichten">
+            <label class="tabNavigator">Nachrichtensystem</label>
+        </div>
+        <div onclick="toogleVisualNavigator_Desktop('nav_logout')" id="nav_logout">
+            <label class="tabNavigator">Abmelden</label>
+        </div>
+    </nav>
+    <div>   <!-- Interner Display -->
+        <div id="home" class="innerDisplay">
+            <ul class="wrapper_profile" id="match_header">
+                <ul class="wrapper_profile" id="aktualisieren">
+                    <button onclick="aktualisiere()">Suche aktualisieren</button>
+                </ul>
+                <ul class="wrapper_profile">
+                    <input id="auswahl" value="Nutzername des Ziels angeben" style="background-color: white"/>
+                </ul>
+                <ul>
+                    <script>
+                        function mitteilung1()
+                        {
+                            document.getElementById("auswahl").style.backgroundColor = "red";
+                            document.getElementById("auswahl").style.color = "white";
+                            document.getElementById("auswahl").value = "Diese Funktion wurde leider noch nicht umgesetzt.";
+                        }
+                    </script>
+                    <button onclick="addMatch('matches', entry.usernameid, entry.usernameid, entry.usernameid, entry.usernameid, 'gelb')">Profil aufrufen</button>
+                    <button onclick="mitteilung1()">Um Freigabe bitten</button>
+                    <button onclick="mitteilung1()">Nach Mailadresse fragen</button>
+                </ul>
+            </ul>
+            <div id="suchergebnisse">
+                <table class="kommunikation" id="matches">
+                    <th>Nutzername</th>
+                    <th>Geschlecht</th>
+                    <th>Geburtstag</th>
+                    <th>PLZ</th>
+                </table>
+            </div>
+            <div id="profil_match" >
+                <div class="wrapper_profile">
+                    <ul>
+                        <label>Nutzername: <%= entry.usernameid %></label>
+                        <label id="nutzername_match"/>
+                    </ul>
+                    <ul>
+                        <label>Vorname: <%= entry.firstname %></label>
+                        <label id="vorname_match"/>
+                    </ul>
+                    <ul>
+                        <label>Nachname: <%= entry.familyname %></label>
+                        <label id="nachname_match"/>
+                    </ul>
+                    <ul>
+                        <label>Geschlecht: <%= entry.gender %></label>
+                        <label id="geschlecht_match"/>
+                    </ul>
+                    <ul>
+                        <label>Geburtstag: <%= entry.birthday %></label>
+                        <label id="geburtstag_match"/>
+                    </ul>
+                    <ul>
+                        <label>Haarfarbe: <%= entry.color_hair %></label>
+                        <label id="haarfarbe_match"/>
+                    </ul>
+                    <ul>
+                        <label>Augenfarbe: <%= entry.color_eyes %></label>
+                        <label id="augenfarbe_match"/>
+                    </ul>
+                    <ul>
+                        <label>Körpergröße(cm): <%= entry.bodysize %></label>
+                        <label id="koerpergroese_match"/>
+                    </ul>
+                    <ul>
+                        <label>Figur: <%= entry.body %></label>
+                        <label id="figur_match"/>
+                    </ul>
+                    <ul hidden>
+                        <label >Sternzeichen: </label>
+                        <label id="sternzeichen_west_match"/>
+                    </ul>
+                    <ul>
+                        <label>Aszendent: <%= entry.stars_aszendent %></label>
+                        <label id="aszendent_match"/>
+                    </ul>
+                    <ul hidden>
+                        <label>Chinesisches Sternzeichen: </label>
+                        <label id="sternzeichen_ost_match"/>
+                    </ul>
+                    <ul>
+                        <label>Auf der Suche nach: <%= entry.affection %></label>
+                        <label id="orientierung_match"/>
+                    </ul>
+                    <ul>
+                        <label>Postleitzahl: <%= entry.plz %></label>
+                        <label id="plz_match"/>
+                    </ul>
+                    <ul id="wohnort_match_anzeige" hidden>
+                        <label>Wohnort: <%= entry.place %></label>
+                        <label id="wohnort_match"/>
+                    </ul>
+                    <ul>
+                        <label>Anzahl Kinder: <%= entry.kids_amount %></label>
+                        <label id="kinder_match"/>
+                    </ul>
+                    <ul>
+                        <label>Raucher?: <%= entry.smoker %></label>
+                        <label id="raucher_match"/>
+                    </ul>
+                    <ul id="persoenlichkeit_match_anzeige" hidden>
+                        <label>Persönlichkeitstyp: </label>
+                        <label id="persoenlichkeit_match"/>
+                    </ul>
+                    <ul hidden>
+                        <label>Persönlichkeitszahl: </label>
+                        <label id="persoenlichkleitszahl_match"/>
+                    </ul>
+                    <ul hidden>
+                        <label>Seelenzahl: </label>
+                        <label id="seelenzahl_match"/>
+                    </ul>
+                    <ul hidden>
+                        <label>Schicksalszahl: </label>
+                        <label id="schicksalszahl_match"/>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="nutzerprofil" hidden>
+            <div class="wrapper_profile">
+                <ul>
+                    <label id="nutzername"/>
+                </ul>
+                <ul>
+                    <label id="nachname_alt">Nachname: <input id="nachname_neu"/></label>
+                </ul>
+                <ul>
+                    <label id="vorname"/>
+                </ul>
+                <ul>
+                    <label id="geburtstag"/>
+                </ul>
+                <ul>
+                    <label id="aszendent_label">Aszendent:</label>
+                    <select id="aszendent">
+                        <option>Unbekannt</option>
+                        <option>Steinbock</option>
+                        <option>Wassermann</option>
+                        <option>Fische</option>
+                        <option>Widder</option>
+                        <option>Stier</option>
+                        <option>Zwillinge</option>
+                        <option>Krebs</option>
+                        <option>Löwe</option>
+                        <option>Jungfrau</option>
+                        <option>Waage</option>
+                        <option>Skorpion</option>
+                        <option>Schütze</option>
+                    </select>
+                </ul>
+                <ul>
+                    <label  id="geschlecht_label">Geschlecht:</label>
+                    <select id="geschlecht">
+                        <option>divers</option>
+                        <option>männlich</option>
+                        <option>weiblich</option>
+                    </select>
+                </ul>
+                <ul>
+                    <label id="augenfarbe_label"/>
+                </ul>
+                <ul>
+                    <label id="koerpergroesse_label"/>
+                </ul>
+                <ul>
+                    <label id="figur_label">Figur: </label>
+                    <select id="figur">
+                        <option>Sehr schlanke Figur</option>
+                        <option>Schlanke Figur</option>
+                        <option>Normale/Durchschnittliche Figur</option>
+                        <option>Ein paar Kilos zu viel</option>
+                        <option>Rubensfigur</option>
+                        <option>Dick</option>
+                    </select>
+                </ul>
+                <ul>
+                    <label id="kinder_label">Kinder: <input id="kinder" value="0"/></label>
+                </ul>
+                <ul>
+                    <label id="raucher_label" hidden>Raucher: </label>
+                    <select id="raucher" hidden>
+                        <option>Raucher</option>
+                        <option>Nichtraucher</option>
+                    </select>
+                </ul>
+                <ul>
+                    <label id="plz_label" hidden>Postleitzahl: <input id="plz"hidden/></label>
+                </ul>
+                <ul>
+                    <label id="stadt_label" hidden>Wohnort: <input id="stadt" value="optional" hidden/></label>
+                </ul>
+                <ul>
+                    <label>Persönlichkeitstyp: </label>
+                    <script>
+                        function f_pTyp_schalter() {
+                            switch (document.getElementById("pTyp_schalter").selectedIndex)
+                            {
+                                case 0:
+                                    window.open('http://www.typentest.de/index.htm');
+                                    break;
+                                case 1:
+                                    document.getElementById("pTyp1").hidden = false;
+                                    document.getElementById("pTyp2").hidden = false;
+                                    document.getElementById("pTyp3").hidden = false;
+                                    document.getElementById("pTyp4").hidden = false;
+                                    document.getElementById("pTyp5").hidden = false;
+                                    break;
+                            }
+                        }
+                    </script>
+                    <select id="pTyp_schalter">
+                        <option>Externe Webseite</option>
+                        <option>Eingabe</option>
+                    </select>
+                    <button id="pTyp_schalter_button" onclick="f_pTyp_schalter()">anzeigen</button>
+                    <ul>
+                        <select name="pTyp1" id="pTyp1" hidden>
+                            <option>E</option>
+                            <option>I</option>
+                        </select>
+                        <select name="pTyp2" id="pTyp2" hidden>
+                            <option>P</option>
+                            <option>T</option>
+                        </select>
+                        <select name="pTyp3" id="pTyp3" hidden>
+                            <option>H</option>
+                            <option>K</option>
+                        </select>
+                        <select name="pTyp4" id="pTyp4" hidden>
+                            <option>G</option>
+                            <option>S</option>
+                        </select>
+                        <select name="pTyp5" id="pTyp5" hidden>
+                            <option>r</option>
+                            <option>e</option>
+                        </select>
+                    </ul>
+                </ul>
+                <ul>
+                    <label id="email_label" hidden>E-Mail Adresse: <input id="email" value="Neue Mailadresse" hidden/></label>
+                </ul>
+                <ul>
+                    <label>Neues Passwort: <input type="password" id="passwort1"/></label>
+                </ul>
+                <ul>
+                    <label>Neues Passwort wiederholen: <input type="password" id="passwort2"/></label>
+                </ul>
+                <ul>
+                    <button id="starteBearbeitung">Änderungen umsetzen</button>
+                </ul>
+            </div>
+        </div>
+        <div id="nachrichtensystem" class="innerDisplay" hidden>
+            <label style="background-color: #e70032; color: white;
+                    font-size: 5em">Sorry, dieser Bereich ist noch eine Baustelle</label>
+            <div>
+                <ul id="post_header">
+                    <input id="post_empfaenger"/>
+                    <button>Positiv Antworten</button>
+                    <button>Negativ Antworten</button>
+                </ul>
+                <table class="kommunikation">
+                    <th>Sender</th>
+                    <th>Nachricht</th>
+                </table>
+            </div>
+        </div>
+        <div id="logout">
+            <a href="/logout" style="color: black">Abmelden</a>
+        </div>
+    </div>
+</div>
+<div id="mobil" hidden>
+    <nav class="flex-container2">    <!-- Navigator und Wrapper -->
+        <div  onclick="toogleVisualNavigator_Mobil('nav_home2')" id="nav_home2">
+            <label class="tabNavigator">Home</label>
+        </div>
+        <div onclick="toogleVisualNavigator_Mobil('nav_profil2')" id="nav_profil2">
+            <label class="tabNavigator">Profil bearbeiten</label>
+        </div>
+        <div onclick="toogleVisualNavigator_Mobil('nav_nachrichten2')" id="nav_nachrichten2">
+            <label class="tabNavigator">Nachrichtensystem</label>
+        </div>
+        <div onclick="toogleVisualNavigator_Mobil('nav_logout2')" id="nav_logout2">
+            <label class="tabNavigator">Abmelden</label>
+        </div>
+    </nav>
+    <div>   <!-- Interner Display -->
+        <div id="home2" class="innerDisplay">
+            <ul class="wrapper_profile" id="match_header2">
+                <ul class="wrapper_profile" id="aktualisieren2">
+                    <button onclick="aktualisiere2()">Suche aktualisieren</button>
+                </ul>
+                <ul class="wrapper_profile">
+                    <input id="auswahl2" value="Nutzername des Ziels angeben" style="background-color: white"/>
+                </ul>
+                <ul>
+                    <script>
+                        function mitteilung2()
+                        {
+                            document.getElementById("auswahl2").style.backgroundColor = "red";
+                            document.getElementById("auswahl2").style.color = "white";
+                            document.getElementById("auswahl2").value = "Diese Funktion wurde leider noch nicht umgesetzt.";
+                        }
+                    </script>
+                    <button  onclick="addMatch('matches', entry.usernameid, entry.usernameid, entry.usernameid, entry.usernameid, 'grün')">Profil aufrufen</button>
+                    <button onclick="mitteilung2()">Um Freigabe bitten</button>
+                    <button onclick="mitteilung2()">Nach Mailadresse fragen</button>
+                </ul>
+            </ul>
+            <div id="suchergebnisse2">
+                <table class="kommunikation" id="matches2">
+                    <th>Treffer<br/><br/>Nutzername<br/>Geschlecht<br/>Geburtstag<br/>Postleitzahl</th>
+                </table>
+            </div>
+            <div id="profil_match2" hidden>
+                <div class="wrapper_profile">
+                    <ul>
+                        <label>Nutzername: <%= entry.usernameid %></label>
+                        <label id="nutzername_match2"/>
+                    </ul>
+                    <ul>
+                        <label>Vorname: <%= entry.firstname %></label>
+                        <label id="vorname_match2"/>
+                    </ul>
+                    <ul>
+                        <label>Nachname: <%= entry.familyname %></label>
+                        <label id="nachname_match2"/>
+                    </ul>
+                    <ul>
+                        <label>Geschlecht: <%= entry.gender %></label>
+                        <label id="geschlecht_match2"/>
+                    </ul>
+                    <ul>
+                        <label>Geburtstag: <%= entry.birthday %></label>
+                        <label id="geburtstag_match2"/>
+                    </ul>
+                    <ul>
+                        <label>Haarfarbe: <%= entry.color_hair %></label>
+                        <label id="haarfarbe_match2"/>
+                    </ul>
+                    <ul>
+                        <label>Augenfarbe: <%= entry.color_eyes %></label>
+                        <label id="augenfarbe_match2"/>
+                    </ul>
+                    <ul>
+                        <label>Körpergröße(cm): <%= entry.bodysize %></label>
+                        <label id="koerpergroese_match2"/>
+                    </ul>
+                    <ul>
+                        <label>Figur: <%= entry.body %></label>
+                        <label id="figur_match2"/>
+                    </ul>
+                    <ul hidden>
+                        <label>Sternzeichen: </label>
+                        <label id="sternzeichen_west_match2"/>
+                    </ul>
+                    <ul>
+                        <label>Aszendent: <%= entry.stars_aszendent %></label>
+                        <label id="aszendent_match2"/>
+                    </ul>
+                    <ul hidden>
+                        <label>Chinesisches Sternzeichen: </label>
+                        <label id="sternzeichen_ost_match2"/>
+                    </ul>
+                    <ul hidden>
+                        <label>Auf der Suche nach: </label>
+                        <label id="orientierung_match2"/>
+                    </ul>
+                    <ul>
+                        <label>Postleitzahl: <%= entry.plz %></label>
+                        <label id="plz_match2"/>
+                    </ul>
+                    <ul id="wohnort_match_anzeige2" hidden>
+                        <label>Wohnort: <%= entry.place %></label>
+                        <label id="wohnort_match2"/>
+                    </ul>
+                    <ul>
+                        <label>Anzahl Kinder: <%= entry.kids_amount %></label>
+                        <label id="kinder_match2"/>
+                    </ul>
+                    <ul>
+                        <label>Raucher?: <%= entry.smoker %></label>
+                        <label id="raucher_match2"/>
+                    </ul>
+                    <ul id="persoenlichkeit_match_anzeige2" hidden>
+                        <label>Persönlichkeitstyp: </label>
+                        <label id="persoenlichkeit_match2"/>
+                    </ul>
+                    <ul hidden>
+                        <label>Persönlichkeitszahl: </label>
+                        <label id="persoenlichkleitszahl_match2"/>
+                    </ul>
+                    <ul hidden>
+                        <label>Seelenzahl: </label>
+                        <label id="seelenzahl_match2"/>
+                    </ul>
+                    <ul hidden>
+                        <label>Schicksalszahl: </label>
+                        <label id="schicksalszahl_match2"/>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="nutzerprofil2" hidden>
+            <div class="wrapper_profile">
+                <ul>
+                    <label id="nutzername2"/>
+                </ul>
+                <ul>
+                    <label id="nachname_alt2">Nachname: <input id="nachname_neu2"/></label>
+                </ul>
+                <ul>
+                    <label id="vorname2"/>
+                </ul>
+                <ul>
+                    <label id="geburtstag2"/>
+                </ul>
+                <ul>
+                    <label id="aszendent_label2">Aszendent:</label>
+                    <select id="aszendent2">
+                        <option>Unbekannt</option>
+                        <option>Steinbock</option>
+                        <option>Wassermann</option>
+                        <option>Fische</option>
+                        <option>Widder</option>
+                        <option>Stier</option>
+                        <option>Zwillinge</option>
+                        <option>Krebs</option>
+                        <option>Löwe</option>
+                        <option>Jungfrau</option>
+                        <option>Waage</option>
+                        <option>Skorpion</option>
+                        <option>Schütze</option>
+                    </select>
+                </ul>
+                <ul>
+                    <label  id="geschlecht_label2">Geschlecht:</label>
+                    <select id="geschlecht2">
+                        <option>divers</option>
+                        <option>männlich</option>
+                        <option>weiblich</option>
+                    </select>
+                </ul>
+                <ul>
+                    <label id="augenfarbe_label2"/>
+                </ul>
+                <ul>
+                    <label id="koerpergroesse_label2"/>
+                </ul>
+                <ul>
+                    <label id="figur_label2">Figur: </label>
+                    <select id="figur2">
+                        <option>Sehr schlanke Figur</option>
+                        <option>Schlanke Figur</option>
+                        <option>Normale/Durchschnittliche Figur</option>
+                        <option>Ein paar Kilos zu viel</option>
+                        <option>Rubensfigur</option>
+                        <option>Dick</option>
+                    </select>
+                </ul>
+                <ul>
+                    <label id="kinder_label2">Kinder: <input id="kinder2" value="0"/></label>
+                </ul>
+                <ul>
+                    <label id="raucher_label2" hidden>Raucher: </label>
+                    <select id="raucher2" hidden>
+                        <option>Raucher</option>
+                        <option>Nichtraucher</option>
+                    </select>
+                </ul>
+                <ul>
+                    <label id="plz_label2" hidden>Postleitzahl: <input id="plz2"hidden/></label>
+                </ul>
+                <ul>
+                    <label id="stadt_label2" hidden>Wohnort: <input id="stadt2" value="optional" hidden/></label>
+                </ul>
+                <ul>
+                    <label>Persönlichkeitstyp: </label>
+                    <script>
+                        function f_pTyp_schalter2() {
+                            switch (document.getElementById("pTyp_schalter2").selectedIndex)
+                            {
+                                case 0:
+                                    window.open('http://www.typentest.de/index.htm');
+                                    break;
+                                case 1:
+                                    document.getElementById("pTyp12").hidden = false;
+                                    document.getElementById("pTyp22").hidden = false;
+                                    document.getElementById("pTyp32").hidden = false;
+                                    document.getElementById("pTyp42").hidden = false;
+                                    document.getElementById("pTyp52").hidden = false;
+                                    break;
+                            }
+                        }
+                    </script>
+                    <select id="pTyp_schalter2">
+                        <option>Externe Webseite</option>
+                        <option>Eingabe</option>
+                    </select>
+                    <button id="pTyp_schalter_button2" onclick="f_pTyp_schalter2()">anzeigen</button>
+                    <ul>
+                        <select name="pTyp12" id="pTyp12" hidden>
+                            <option>E</option>
+                            <option>I</option>
+                        </select>
+                        <select name="pTyp22" id="pTyp22" hidden>
+                            <option>P</option>
+                            <option>T</option>
+                        </select>
+                        <select name="pTyp32" id="pTyp32" hidden>
+                            <option>H</option>
+                            <option>K</option>
+                        </select>
+                        <select name="pTyp42" id="pTyp42" hidden>
+                            <option>G</option>
+                            <option>S</option>
+                        </select>
+                        <select name="pTyp52" id="pTyp52" hidden>
+                            <option>r</option>
+                            <option>e</option>
+                        </select>
+                    </ul>
+                </ul>
+                <ul>
+                    <label id="email_label2" hidden>E-Mail Adresse: <input id="email2" value="Neue Mailadresse" hidden/></label>
+                </ul>
+                <ul>
+                    <label>Neues Passwort: <input type="password" id="passwort12"/></label>
+                </ul>
+                <ul>
+                    <label>Neues Passwort wiederholen: <input type="password" id="passwort22"/></label>
+                </ul>
+                <ul>
+                    <button id="starteBearbeitung2">Änderungen umsetzen</button>
+                </ul>
+            </div>
+        </div>
+        <div id="nachrichtensystem2" class="innerDisplay" hidden>
+            <label style="background-color: #e70032; color: white;
+                    font-size: 5em">Sorry, dieser Bereich ist noch eine Baustelle</label>
+            <div>
+                <ul id="post_header2">
+                    <input id="post_empfaenger2"/>
+                    <button>Positiv Antworten</button>
+                    <button>Negativ Antworten</button>
+                </ul>
+
+                <table class="kommunikation">
+                    <th>Sender</th>
+                    <th>Nachricht</th>
+                </table>
+            </div>
+        </div>
+        <div id="logout2">
+            <a href="/logout" style="color: black">Abmelden</a>
+        </div>
+    </div>
+</div>
+<% } %>
+<footer>
+    <a href="hilfe" style="color: black">Hilfe</a>
+    <a href="info" style="color: black">Impressum</a>
+    <a href="info" style="color: black">Datenschutz</a>
+</footer>
+</body>
+</html>

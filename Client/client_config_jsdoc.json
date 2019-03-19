@@ -1,0 +1,26 @@
+{
+  "plugins": ["plugins/markdown"],
+  "markdown":
+  {
+    "hardwrap": true
+  },
+  "recurseDepth": 10,
+  "source":
+  {
+    "include": ["./Client/modules/Astrologie.js", "./Client/modules/Datum.js", "./Client/modules/Mitglied.js", "./Client/modules/Numerologie.js"],
+    "includePattern": ".+\\.js(doc|x)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "sourceType": "module",
+  "tags":
+  {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc","closure"]
+  },
+  "templates":
+  {
+    "cleverLinks": false,
+    "monospaceLinks": false
+  }
+
+}

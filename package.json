@@ -1,0 +1,36 @@
+{
+  "name": "ParanLove",
+  "version": "0.4.0",
+  "description": "Esoterische Partnerbörse",
+  "jest": {
+    "verbose": true
+  },
+  "scripts": {
+    "doc_server": "jsdoc --readme ./Server/serverREADME.md ./Server/UserData.js -c ./Server/server_config_jsdoc.json -d serverDoc && opener serverDoc/index.html",
+    "doc_client": "jsdoc --readme ./Client/clientREADME.md ./Client/modules/Astrologie.js -c ./Client/client_config_jsdoc.json -d clientDoc && opener clientDoc/index.html",
+    "opendoc": "npm run openClientDoc && openServerDoc",
+    "openClientDoc": "opener clientDoc/index.html",
+    "openServerDoc": "opener serverDoc/index.html",
+    "start": "opener http://localhost:3011 && node ./Server/app.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "basic-auth": "^2.0.1",
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "fs": "^0.0.1-security",
+    "opener": "^1.5.0",
+    "path": "^0.12.7",
+    "sqlite3": "^4.0.2"
+  },
+  "devDependencies": {
+    "apidoc": "^0.17.6",
+    "jest": "^24.0.0",
+    "jsdoc": "^3.5.5",
+    "supertest": "^3.4.2"
+  },
+  "author": "Jean-Philippe Laventure & Sebastian Eberspach",
+  "license": "GPL-3.0"
+}

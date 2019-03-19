@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+    <link rel="stylesheet" href="./layout/style.css">
+    <title>ParanLove - Registrierung</title>
+    <script type="text/javascript" src="./modules/Mitglied.js"></script>
+    <script type="text/javascript" src="./modules/Astrologie.js"></script>
+    <script type="text/javascript" src="./modules/Numerologie.js"></script>
+    <script type="text/javascript" src="./modules/Datum.js"></script>
+    <!-- Quelle muss mit "./" angegeben werden und darf keine exports enthalten -->
+</head>
+<body onload="legeAnzeigefest()">
+<script>
+    /**
+     * @author Jean-Philippe Laventure
+     * @description Prüft die Bildschirmgröße des Gerätes (Achtung: nicht die Fenstergröße, sondern die
+     * Bildschirmgröße wird abgefragt) und passt die Ansicht daran an.
+     */
+    function legeAnzeigefest()
+    {
+        const bildschirmgroesse =  window.screen.availWidth;
+
+        if (bildschirmgroesse < 800)
+        {
+            document.getElementById("mobil").hidden = false;
+            document.getElementById("desktop").hidden = true;
+        }
+        else
+        {
+            document.getElementById("desktop").hidden = false;
+            document.getElementById("mobil").hidden = true;
+        }
+    }
+</script>
+<header id="info_header">
+    <label style="font-size: 5vw">Ihre Registrierung bei ParanLove</label>
+</header>
+<div hidden id="desktop">
+    <div id="wrapperRegistrierung">
+        <form class="registrierung" method="post" action="/registrierung">
+            <div>
+                <a style="font-size: 4vw">Persönliche Daten</a>
+                <ul>
+                    <label>Nutzername: <input id="nutzername" name="nutzername"/></label>
+                </ul>
+                <ul>
+                    <label>Nachname:  <input id="nachname" name="nachname"/></label>
+                </ul>
+                <ul>
+                    <label>Vorname: <input id="vorname" name="vorname"/></label>
+                </ul>
+                <ul id="infoY" hidden>
+                    <p id="infoY_text">Diese Version von ParanLove unterstützt leider noch keine automatische Erkennung der Aussprache
+                        von "Y". Bitte geben Sie ein, wie welches "Y" in Ihrem Namen zu interpretieren ist. Tippen Sie
+                        ein "K" ein, wenn der Buchstabe als Konsonant gelesen wird und ein "V", wenn es als Vokal gelesen
+                        wird.Trennen Sie (falls Ihr Name mehr als ein "Y" enthält) die einzelnen Eingaben durch
+                        Bindestriche ("-").
+                    </p>
+                    <input id="interpretiereY"/>
+                </ul>
+                <ul>
+                    <label>Geburtstag: <input id="geburtstag" name="geburtstag"/></label>
+                </ul>
+                <ul>
+                    <label>Aszendent:</label>
+                    <select name="aszendent" id="aszendent">
+                        <option>Unbekannt</option>
+                        <option>Steinbock</option>
+                        <option>Wassermann</option>
+                        <option>Fische</option>
+                        <option>Widder</option>
+                        <option>Stier</option>
+                        <option>Zwillinge</option>
+                        <option>Krebs</option>
+                        <option>Löwe</option>
+                        <option>Jungfrau</option>
+                        <option>Waage</option>
+                        <option>Skorpion</option>
+                        <option>Schütze</option>
+                    </select>
+                </ul>
+                <ul>
+                    <label>Geschlecht:</label>
+                    <select name="geschlecht" id="geschlecht">
+                        <option>divers</option>
+                        <option>männlich</option>
+                        <option>weiblich</option>
+                    </select>
+                </ul>
+                <ul>
+                    <script>
+                        function hinweis_Haarfarbe_anzeigen()
+                        {
+                            document.getElementById("haarfarbe_label").value = "Sollte Ihr Haar gefärbt sein, geben Sie bitte Ihre Naturhaarfarbe an.";
+                        }
+                        function hinweis_Haarfarbe_verbergen()
+                        {
+                            document.getElementById("haarfarbe_label").value = "Haarfarbe:";
+                        }
+                    </script>
+                    <label id="haarfarbe_label" onmouseover="hinweis_Haarfarbe_anzeigen()",
+                           onmouseout="hinweis_Haarfarbe_verbergen()">Haarfarbe: </label>
+                    <select name="haarfarbe" id="haarfarbe">
+                        <option>Blond</option>
+                        <option>Dunkelblond</option>
+                        <option>Hellbraun</option>
+                        <option>Braun</option>
+                        <option>Dunkelbraun</option>
+                        <option>Rotbraun</option>
+                        <option>Rot</option>
+                        <option>Schwarz</option>
+                        <option>Grau</option>
+                        <option>Weiß</option>
+                    </select>
+                </ul>
+                <ul>
+                    <label>Augenfarbe: </label>
+                    <select name="augenfarbe" id="augenfarbe">
+                        <option>Blau</option>
+                        <option>Braun</option>
+                        <option>Grau</option>
+                        <option>Grün</option>
+                        <option>Iris-Heterochromie mit blau</option>
+                        <option>Iris-Heterochromie mit braun</option>
+                        <option>Iris-Heterochromie mit grau</option>
+                        <option>Iris-Heterochromie mit grün</option>
+                    </select>
+                </ul>
+                <ul>
+                    <script>
+                        function hinweis_Koerpergroesse_anzeigen()
+                        {
+                            document.getElementById("koerpergroesse_label").value = "Bitte geben Sie die Größe in Metern an.";
+                        }
+                        function hinweis_Koerpergroesse_verbergen()
+                        {
+                            document.getElementById("koerpergroesse_label").value = "Körpergröße: ";
+                        }
+                    </script>
+                    <label id="koerpergroesse_label" onmouseout="hinweis_Haarfarbe_verbergen()"
+                           onmouseover="hinweis_Haarfarbe_anzeigen()">Körpergröße: <input id="koerpergroesse"
+                                                                                          name="koerpergroesse"/></label>
+                </ul>
+                <ul>
+                    <label>Figur: </label>
+                    <select name="figur" id="figur">
+                        <option>Sehr schlanke Figur</option>
+                        <option>Schlanke Figur</option>
+                        <option>Normale/Durchschnittliche Figur</option>
+                        <option>Ein paar Kilos zu viel</option>
+                        <option>Rubensfigur</option>
+                        <option>Dick</option>
+                    </select>
+                </ul>
+                <ul>
+                    <label>Auf der Suche nach: </label>
+                    <select name="orientierung" id="orientierung">
+                        <option>Beides</option>
+                        <option>Frauen</option>
+                        <option>Männer</option>
+                    </select>
+                </ul>
+                <ul>
+                    <label>Kinder: <input name="kinder" id="kinder" value="0"/></label>
+                </ul>
+                <ul>
+                    <label>Raucher: </label>
+                    <select name="raucher" id="raucher">
+                        <option>Raucher</option>
+                        <option>Nichtraucher</option>
+                    </select>
+                </ul>
+                <ul>
+                    <label>Postleitzahl: <input name="plz" id="plz"/></label>
+                </ul>
+                <ul>
+                    <label>Wohnort: <input id="stadt" name="stadt" value="optional"/></label>
+                </ul>
+                <ul>
+                    <label>Persönlichkeitstyp: </label>
+                    <script>
+                        /**
+                         * @author Jean-Philippe Laventure
+                         * @description Steuert die Optionen die Webseite (typentest.de) aufzurufen oder die Eingabe für
+                         * den Persönlichkeitstyp anzuzeigen (und zu aktivieren).
+                         */
+                        function f_pTyp_schalter()
+                        {
+                            switch (document.getElementById("pTyp_schalter").selectedIndex)
+                            {
+                                case 0:
+                                    window.open('http://www.typentest.de/index.htm');
+                                    break;
+                                case 1:
+                                    document.getElementById("pTyp1").hidden = false;
+                                    document.getElementById("pTyp2").hidden = false;
+                                    document.getElementById("pTyp3").hidden = false;
+                                    document.getElementById("pTyp4").hidden = false;
+                                    document.getElementById("pTyp5").hidden = false;
+                                    break;
+                            }
+                        }
+                    </script>
+                    <select id="pTyp_schalter">
+                        <option>Externe Webseite</option>
+                        <option>Eingabe</option>
+                    </select>
+                    <button id="pTyp_schalter_button" onclick="f_pTyp_schalter()">anzeigen</button>
+                    <ul>
+                        <select name="pTyp1" id="pTyp1" hidden>
+                            <option>E</option>
+                            <option>I</option>
+                        </select>
+                        <select name="pTyp2" id="pTyp2" hidden>
+                            <option>P</option>
+                            <option>T</option>
+                        </select>
+                        <select name="pTyp3" id="pTyp3" hidden>
+                            <option>H</option>
+                            <option>K</option>
+                        </select>
+                        <select name="pTyp4" id="pTyp4" hidden>
+                            <option>G</option>
+                            <option>S</option>
+                        </select>
+                        <select name="pTyp5" id="pTyp5" hidden>
+                            <option>r</option>
+                            <option>e</option>
+                        </select>
+                    </ul>
+                </ul>
+                <ul>
+                    <label>E-Mail Adresse: <input id="email" name="email"/></label>
+                </ul>
+                <ul>
+                    <label>Passwort: <input type="password" name="passwort1" id="passwort1"/></label>
+                </ul>
+                <ul>
+                    <label>Passwort wiederholen: <input type="password" name="passwort2" id="passwort2"/></label>
+                </ul>
+            </div>
+            <script>
+                /*
+                 * Die HTML-Datei enthält deshalb so viel JavaScript-Code, um die Flexibilität der einzelnen Module zu sichern.
+                 * Der enthaltene Code dient hauptsächlich dem Auslesen der Nutzereingaben, sodass nicht extra mehrere Dateien
+                 * angepasst werden müssen, sollte beschlossen werden, die HTML-Datei zu verändern.
+                 */
+                /**
+                 * @author Jean-Philippe Laventure
+                 * @description Erstellt ein neues Nutzerprofil unter Verwendung der Mitglied-Klasse. (für die Mobile-Ansicht)
+                 */
+                function erstelleProfil()
+                {
+                    let passwort;
+                    let raucher;
+                    let persoenlichkeitstyp = "Unbekannt";
+                    let haarfarbe;
+                    let augenfarbe;
+                    let figur;
+                    let orientierung;
+                    const geburtstag = new Datum(document.getElementById("geburtstag").value);
+                    const astrologie = new Astrologie();
+                    const numerologie = new Numerologie(document.getElementById("vorname").value +
+                        document.getElementById("nachname"), geburtstag);
+
+                    if (document.getElementById("passwort1").value === document.
+                    getElementById("passwort2").value)
+                    {
+                        passwort = document.getElementById("passwort1").value;
+                    }
+                    else
+                    {
+                        // Hier wird zukünftig der Fall behandelt, dass das Passwort falsch wiederholt wurde
+                    }
+
+                    if ( document.getElementById("raucher").selectedIndex === 0 )
+                    {
+                        raucher = true;
+                    }
+                    else
+                    {
+                        raucher = false;
+                    }
+
+                    switch(document.getElementById("haarfarbe").selectedIndex)
+                    {
+                        case 0:
+                            haarfarbe = "Blond";
+                            break;
+                        case 1:
+                            haarfarbe = "Dunkelblond";
+                            break;
+                        case 2:
+                            haarfarbe = "Hellbraun";
+                            break;
+                        case 3:
+                            haarfarbe = "Braun";
+                            break;
+                        case 4:
+                            haarfarbe = "Dunkelbraun";
+                            break;
+                        case 5:
+                            haarfarbe = "Rotbraun";
+                            break;
+                        case 6:
+                            haarfarbe = "Rot";
+                            break;
+                        case 7:
+                            haarfarbe = "Schwarz";
+                            break;
+                        case 8:
+                            haarfarbe = "Grau";
+                            break;
+                        case 9:
+                            haarfarbe = "Weiß";
+                            break;
+                    }
+
+                    switch (document.getElementById("orientierung").selectedIndex)
+                    {
+                        case 0:
+                            orientierung = "Beides";
+                            break;
+                        case 1:
+                            orientierung = "Frauen";
+                            break;
+                        case 2:
+                            orientierung = "Männer";
+                            break;
+                    }
+
+                    switch (document.getElementById("augenfarbe").selectedIndex)
+                    {
+                        case 0:
+                            augenfarbe = "Blau";
+                            break;
+                        case 1:
+                            augenfarbe = "Braun";
+                            break;
+                        case 2:
+                            augenfarbe = "Grau";
+                            break;
+                        case 3:
+                            augenfarbe = "Grün";
+                            break;
+                        case 4:
+                            augenfarbe = "Iris-Heterochromie mit blau";
+                            break;
+                        case 5:
+                            augenfarbe = "Iris-Heterochromie mit braun";
+                            break;
+                        case 6:
+                            augenfarbe = "Iris-Heterochromie mit grau";
+                            break;
+                        case 7:
+                            augenfarbe = "Iris-Heterochromie mit grün";
+                            break;
+                    }
+
+                    switch (document.getElementById("figur").selectedIndex)
+                    {
+                        case 0:
+                            figur = "Sehr schlanke Figur";
+                            break;
+                        case 1:
+                            figur = "Schlanke Figur";
+                            break;
+                        case 2:
+                            figur = "Normale/Durchschnittliche Figur";
+                            break;
+                        case 3:
+                            figur = "Ein paar Kilos zu viel";
+                            break;
+                        case 4:
+                            figur = "Rubensfigur";
+                            break;
+                        case 5:
+                            figur = "Dick";
+                            break;
+                    }
+
+                    if (!document.getElementById("pTyp1").hidden)
+                    {
+                        if (document.getElementById("pTyp1").selectedIndex === 0)
+                        {
+                            persoenlichkeitstyp = "E";  // Extrovertiertheit
+                        }
+                        else
+                        {
+                            persoenlichkeitstyp = "I";  // Introvertiertheit
+                        }
+
+                        if (document.getElementById("pTyp2").selectedIndex === 0)
+                        {
+                            persoenlichkeitstyp = persoenlichkeitstyp + "P";    // Praktische Veranlagung
+                        }
+                        else
+                        {
+                            persoenlichkeitstyp = persoenlichkeitstyp + "T";    // Theoretische Veranlagung
+                        }
+
+                        if (document.getElementById("pTyp3").selectedIndex === 0)
+                        {
+                            persoenlichkeitstyp = persoenlichkeitstyp + "H";    // Unabhängig (/Hart)
+                        }
+                        else
+                        {
+                            persoenlichkeitstyp = persoenlichkeitstyp + "K";    // Team-Player (/Kooperativ)
+                        }
+
+                        if (document.getElementById("pTyp4").selectedIndex === 0)
+                        {
+                            persoenlichkeitstyp = persoenlichkeitstyp + "G";    // Agiert geplant
+                        }
+                        else
+                        {
+                            persoenlichkeitstyp = persoenlichkeitstyp + "S";    // Agiert spontan
+                        }
+
+                        if (document.getElementById("pTyp5").selectedIndex === 0)
+                        {
+                            persoenlichkeitstyp = persoenlichkeitstyp + "r";    // emotional resistent
+                        }
+                        else
+                        {
+                            persoenlichkeitstyp = persoenlichkeitstyp + "e";    // emotional empfindlich
+                        }
+                    }
+
+                    let profil = new Mitglied(document.getElementById("nutzername").value,
+                        passwort,
+                        document.getElementById("email").value,
+                        document.getElementById("vorname").value,
+                        document.getElementById("nachname").value,
+                        document.getElementById("geschlecht").selectedIndex,
+                        geburtstag,
+                        document.getElementById("aszendent").value,
+                        astrologie,
+                        numerologie,
+                        haarfarbe,
+                        augenfarbe,
+                        document.getElementById("koerpergroesse").value,
+                        figur,
+                        orientierung,
+                        document.getElementById("plz").value,
+                        document.getElementById("stadt").value,
+                        document.getElementById("kinder").selectedIndex,
+                        raucher,
+                        persoenlichkeitstyp,
+                        [""]);
+                    // Hier wird zukünftig der Fall behandelt, wenn der gewählte Nutzername bereits vergeben ist
+                }
+            </script>
+            <ul>
+                <button onclick="erstelleProfil()" id="buttonTest">Registrieren</button>
+            </ul>
+        </form>
+    </div>
+</div>
+<div hidden id="mobil">
+    <form class="registrierung" method="post" action="/registrierung">
+        <div>
+            <a style="font-size: 4vw">Persönliche Daten</a>
+            <ul>
+                <label>Nutzername: <input id="nutzername2" name="nutzername"/></label>
+            </ul>
+            <ul>
+                <label>Nachname:  <input id="nachname2" name="nachname"/></label>
+            </ul>
+            <ul>
+                <label>Vorname: <input id="vorname2" name="vorname"/></label>
+            </ul>
+            <ul id="infoY2" hidden>
+                <p id="infoY_text2">Diese Version von ParanLove unterstützt leider noch keine automatische Erkennung
+                    der Aussprache von "Y". Bitte geben Sie ein, wie welches "Y" in Ihrem Namen zu interpretieren ist.
+                    Tippen Sie ein "K" ein, wenn der Buchstabe als Konsonant gelesen wird und ein "V", wenn es als
+                    Vokal gelesen wird.Trennen Sie (falls Ihr Name mehr als ein "Y" enthält) die einzelnen Eingaben
+                    durch Bindestriche ("-").
+                </p>
+                <input id="interpretiereY2"/>
+            </ul>
+            <ul>
+                <label>Geburtstag: <input id="geburtstag2" name="geburtstag"/></label>
+            </ul>
+            <ul>
+                <label>Aszendent:</label>
+                <select name="aszendent" id="aszendent2">
+                    <option>Unbekannt</option>
+                    <option>Steinbock</option>
+                    <option>Wassermann</option>
+                    <option>Fische</option>
+                    <option>Widder</option>
+                    <option>Stier</option>
+                    <option>Zwillinge</option>
+                    <option>Krebs</option>
+                    <option>Löwe</option>
+                    <option>Jungfrau</option>
+                    <option>Waage</option>
+                    <option>Skorpion</option>
+                    <option>Schütze</option>
+                </select>
+            </ul>
+            <ul>
+                <label>Geschlecht:</label>
+                <select name="geschlecht" id="geschlecht2">
+                    <option>divers</option>
+                    <option>männlich</option>
+                    <option>weiblich</option>
+                </select>
+            </ul>
+            <ul>
+                <script>
+                    function hinweis_Haarfarbe_anzeigen2()
+                    {
+                        document.getElementById("haarfarbe_label2").value = "Sollte Ihr Haar gefärbt sein, " +
+                            "geben Sie bitte Ihre Naturhaarfarbe an.";
+                    }
+                    function hinweis_Haarfarbe_verbergen2()
+                    {
+                        document.getElementById("haarfarbe_label2").value = "Haarfarbe:";
+                    }
+                </script>
+                <label id="haarfarbe_label2" onmouseover="hinweis_Haarfarbe_anzeigen()",
+                       onmouseout="hinweis_Haarfarbe_verbergen()">Haarfarbe: </label>
+                <select name="haarfarbe" id="haarfarbe2">
+                    <option>Blond</option>
+                    <option>Dunkelblond</option>
+                    <option>Hellbraun</option>
+                    <option>Braun</option>
+                    <option>Dunkelbraun</option>
+                    <option>Rotbraun</option>
+                    <option>Rot</option>
+                    <option>Schwarz</option>
+                    <option>Grau</option>
+                    <option>Weiß</option>
+                </select>
+            </ul>
+            <ul>
+                <label>Augenfarbe: </label>
+                <select name="augenfarbe" id="augenfarbe2">
+                    <option>Blau</option>
+                    <option>Braun</option>
+                    <option>Grau</option>
+                    <option>Grün</option>
+                    <option>Iris-Heterochromie mit blau</option>
+                    <option>Iris-Heterochromie mit braun</option>
+                    <option>Iris-Heterochromie mit grau</option>
+                    <option>Iris-Heterochromie mit grün</option>
+                </select>
+            </ul>
+            <ul>
+                <script>
+                    function hinweis_Koerpergroesse_anzeigen2()
+                    {
+                        document.getElementById("koerpergroesse_label2").value = "Bitte geben Sie die Größe in Metern an.";
+                    }
+                    function hinweis_Koerpergroesse_verbergen2()
+                    {
+                        document.getElementById("koerpergroesse_label2").value = "Körpergröße: ";
+                    }
+                </script>
+                <label id="koerpergroesse_label2" onmouseout="hinweis_Haarfarbe_verbergen()"
+                       onmouseover="hinweis_Haarfarbe_anzeigen()">Körpergröße: <input id="koerpergroesse2"
+                                                                                      name="koerpergroesse"/></label>
+            </ul>
+            <ul>
+                <label>Figur: </label>
+                <select name="figur" id="figur2">
+                    <option>Sehr schlanke Figur</option>
+                    <option>Schlanke Figur</option>
+                    <option>Normale/Durchschnittliche Figur</option>
+                    <option>Ein paar Kilos zu viel</option>
+                    <option>Rubensfigur</option>
+                    <option>Dick</option>
+                </select>
+            </ul>
+            <ul>
+                <label>Auf der Suche nach: </label>
+                <select name="orientierung" id="orientierung2">
+                    <option>Beides</option>
+                    <option>Frauen</option>
+                    <option>Männer</option>
+                </select>
+            </ul>
+            <ul>
+                <label>Kinder: <input name="kinder" id="kinder2" value="0"/></label>
+            </ul>
+            <ul>
+                <label>Raucher: </label>
+                <select name="raucher" id="raucher2">
+                    <option>Raucher</option>
+                    <option>Nichtraucher</option>
+                </select>
+            </ul>
+            <ul>
+                <label>Postleitzahl: <input name="plz" id="plz2"/></label>
+            </ul>
+            <ul>
+                <label>Wohnort: <input id="stadt2" name="stadt" value="optional"/></label>
+            </ul>
+            <ul>
+                <label>Persönlichkeitstyp: </label>
+                <script>
+                    /**
+                     * @author Jean-Philippe Laventure
+                     * @description Steuert die Optionen die Webseite (typentest.de) aufzurufen oder die Eingabe für
+                     * den Persönlichkeitstyp anzuzeigen (und zu aktivieren). (für die Mobile-Ansicht)
+                     */
+                    function f_pTyp_schalter2()
+                    {
+                        switch (document.getElementById("pTyp_schalter2").selectedIndex)
+                        {
+                            case 0:
+                                window.open('http://www.typentest.de/index.htm');
+                                break;
+                            case 1:
+                                document.getElementById("pTyp12").hidden = false;
+                                document.getElementById("pTyp22").hidden = false;
+                                document.getElementById("pTyp32").hidden = false;
+                                document.getElementById("pTyp42").hidden = false;
+                                document.getElementById("pTyp52").hidden = false;
+                                break;
+                        }
+                    }
+                </script>
+                <select id="pTyp_schalter2">
+                    <option>Externe Webseite</option>
+                    <option>Eingabe</option>
+                </select>
+                <button id="pTyp_schalter_button2" onclick="f_pTyp_schalter()">anzeigen</button>
+                <ul>
+                    <select name="pTyp1" id="pTyp12" hidden>
+                        <option>E</option>
+                        <option>I</option>
+                    </select>
+                    <select name="pTyp2" id="pTyp22" hidden>
+                        <option>P</option>
+                        <option>T</option>
+                    </select>
+                    <select name="pTyp3" id="pTyp32" hidden>
+                        <option>H</option>
+                        <option>K</option>
+                    </select>
+                    <select name="pTyp4" id="pTyp42" hidden>
+                        <option>G</option>
+                        <option>S</option>
+                    </select>
+                    <select name="pTyp5" id="pTyp52" hidden>
+                        <option>r</option>
+                        <option>e</option>
+                    </select>
+                </ul>
+            </ul>
+            <ul>
+                <label>E-Mail Adresse: <input id="email2" name="email"/></label>
+            </ul>
+            <ul>
+                <label>Passwort: <input type="password" name="passwort1" id="passwort12"/></label>
+            </ul>
+            <ul>
+                <label>Passwort wiederholen: <input type="password" name="passwort2" id="passwort22"/></label>
+            </ul>
+        </div>
+        <script>
+            /*
+            * Die HTML-Datei enthält deshalb so viel JavaScript-Code, um die Flexibilität der einzelnen Module zu sichern.
+            * Der enthaltene Code dient hauptsächlich dem Auslesen der Nutzereingaben, sodass nicht extra mehrere Dateien
+            * angepasst werden müssen, sollte beschlossen werden, die HTML-Datei zu verändern.
+            **/
+            /**
+             * @author Jean-Philippe Laventure
+             * @description Erstellt ein neues Nutzerprofil unter Verwendung der Mitglied-Klasse. (für die Mobile-Ansicht)
+             */
+            function erstelleProfil2()
+            {
+                let passwort;
+                let raucher;
+                let persoenlichkeitstyp = "Unbekannt";
+                let haarfarbe;
+                let augenfarbe;
+                let figur;
+                let orientierung;
+                const geburtstag = new Datum(document.getElementById("geburtstag2").value);
+                const astrologie = new Astrologie();
+                const numerologie = new Numerologie(document.getElementById("vorname2").value +
+                    document.getElementById("nachname2"), geburtstag);
+
+                if (document.getElementById("passwort12").value === document.
+                getElementById("passwort22").value)
+                {
+                    passwort = document.getElementById("passwort12").value;
+                }
+                else
+                {
+                    // Hier wird zukünftig der Fall behandelt, dass das Passwort falsch wiederholt wurde
+                }
+
+                if ( document.getElementById("raucher2").selectedIndex === 0 )
+                {
+                    raucher = true;
+                }
+                else
+                {
+                    raucher = false;
+                }
+
+                switch(document.getElementById("haarfarbe2").selectedIndex)
+                {
+                    case 0:
+                        haarfarbe = "Blond";
+                        break;
+                    case 1:
+                        haarfarbe = "Dunkelblond";
+                        break;
+                    case 2:
+                        haarfarbe = "Hellbraun";
+                        break;
+                    case 3:
+                        haarfarbe = "Braun";
+                        break;
+                    case 4:
+                        haarfarbe = "Dunkelbraun";
+                        break;
+                    case 5:
+                        haarfarbe = "Rotbraun";
+                        break;
+                    case 6:
+                        haarfarbe = "Rot";
+                        break;
+                    case 7:
+                        haarfarbe = "Schwarz";
+                        break;
+                    case 8:
+                        haarfarbe = "Grau";
+                        break;
+                    case 9:
+                        haarfarbe = "Weiß";
+                        break;
+                }
+
+                switch (document.getElementById("orientierung2").selectedIndex)
+                {
+                    case 0:
+                        orientierung = "Beides";
+                        break;
+                    case 1:
+                        orientierung = "Frauen";
+                        break;
+                    case 2:
+                        orientierung = "Männer";
+                        break;
+                }
+
+                switch (document.getElementById("augenfarbe2").selectedIndex)
+                {
+                    case 0:
+                        augenfarbe = "Blau";
+                        break;
+                    case 1:
+                        augenfarbe = "Braun";
+                        break;
+                    case 2:
+                        augenfarbe = "Grau";
+                        break;
+                    case 3:
+                        augenfarbe = "Grün";
+                        break;
+                    case 4:
+                        augenfarbe = "Iris-Heterochromie mit blau";
+                        break;
+                    case 5:
+                        augenfarbe = "Iris-Heterochromie mit braun";
+                        break;
+                    case 6:
+                        augenfarbe = "Iris-Heterochromie mit grau";
+                        break;
+                    case 7:
+                        augenfarbe = "Iris-Heterochromie mit grün";
+                        break;
+                }
+
+                switch (document.getElementById("figur2").selectedIndex)
+                {
+                    case 0:
+                        figur = "Sehr schlanke Figur";
+                        break;
+                    case 1:
+                        figur = "Schlanke Figur";
+                        break;
+                    case 2:
+                        figur = "Normale/Durchschnittliche Figur";
+                        break;
+                    case 3:
+                        figur = "Ein paar Kilos zu viel";
+                        break;
+                    case 4:
+                        figur = "Rubensfigur";
+                        break;
+                    case 5:
+                        figur = "Dick";
+                        break;
+                }
+
+                if (!document.getElementById("pTyp12").hidden)
+                {
+                    if (document.getElementById("pTyp12").selectedIndex === 0)
+                    {
+                        persoenlichkeitstyp = "E";  // Extrovertiertheit
+                    }
+                    else
+                    {
+                        persoenlichkeitstyp = "I";  // Introvertiertheit
+                    }
+
+                    if (document.getElementById("pTyp22").selectedIndex === 0)
+                    {
+                        persoenlichkeitstyp = persoenlichkeitstyp + "P";    // Praktische Veranlagung
+                    }
+                    else
+                    {
+                        persoenlichkeitstyp = persoenlichkeitstyp + "T";    // Theoretische Veranlagung
+                    }
+
+                    if (document.getElementById("pTyp32").selectedIndex === 0)
+                    {
+                        persoenlichkeitstyp = persoenlichkeitstyp + "H";    // Unabhängig (/Hart)
+                    }
+                    else
+                    {
+                        persoenlichkeitstyp = persoenlichkeitstyp + "K";    // Team-Player (/Kooperativ)
+                    }
+
+                    if (document.getElementById("pTyp42").selectedIndex === 0)
+                    {
+                        persoenlichkeitstyp = persoenlichkeitstyp + "G";    // Agiert geplant
+                    }
+                    else
+                    {
+                        persoenlichkeitstyp = persoenlichkeitstyp + "S";    // Agiert spontan
+                    }
+
+                    if (document.getElementById("pTyp52").selectedIndex === 0)
+                    {
+                        persoenlichkeitstyp = persoenlichkeitstyp + "r";    // emotional resistent
+                    }
+                    else
+                    {
+                        persoenlichkeitstyp = persoenlichkeitstyp + "e";    // emotional empfindlich
+                    }
+                }
+
+                let profil = new Mitglied(document.getElementById("nutzername2").value,
+                    passwort,
+                    document.getElementById("email2").value,
+                    document.getElementById("vorname2").value,
+                    document.getElementById("nachname2").value,
+                    document.getElementById("geschlecht2").selectedIndex,
+                    geburtstag,
+                    document.getElementById("aszendent2").value,
+                    astrologie,
+                    numerologie,
+                    haarfarbe,
+                    augenfarbe,
+                    document.getElementById("koerpergroesse2").value,
+                    figur,
+                    orientierung,
+                    document.getElementById("plz2").value,
+                    document.getElementById("stadt2").value,
+                    document.getElementById("kinder2").selectedIndex,
+                    raucher,
+                    persoenlichkeitstyp,
+                    [""]);
+                // Hier wird zukünftig der Fall behandelt, wenn der gewählte Nutzername bereits vergeben ist
+            }
+        </script>
+        <ul>
+            <button onclick="erstelleProfil2()" id="buttonTest2">Registrieren</button>
+        </ul>
+    </form>
+</div>
+
+
+</body>
+<footer>
+    <a href="hilfe" style="color: black">Hilfe</a>
+    <a href="info" style="color: black">Impressum</a>
+    <a href="info" style="color: black">Datenschutz</a>
+</footer>
+</html>

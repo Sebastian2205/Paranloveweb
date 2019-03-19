@@ -1,0 +1,121 @@
+nav
+{
+    background-color: #e70032;;
+}
+.flex-container
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-container2
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.tabNavigator
+{
+    margin-left: 5em;
+    margin-right: 5em;
+}
+
+.innerDisplay
+{
+    font-weight: bold;
+    box-sizing: border-box;
+    border-style: solid;
+}
+
+.nutzerprofil
+{
+    padding-left: 25%;
+    padding-right: 25%;
+}
+
+.wrapper_profile
+{
+    padding-left: 25%;
+    padding-right: 25%;
+    box-sizing: border-box;
+}
+
+#match_header2
+{
+    padding-right: 0%;
+    padding-left: 0%;
+}
+
+#post_header
+{
+    padding-left: 25%;
+    padding-right: 25%;
+    box-sizing: border-box;
+}
+
+.kommunikation
+{
+    text-align: center;
+    width: 100%;
+    border: 1px solid black;
+}
+
+footer
+{
+    background-color: #ffb5d4;
+}
+footer, a
+{
+    padding-right: 10%;
+    padding-left: 10%;
+    text-align: center;
+}
+#infoY
+{
+    border-style: solid;
+}
+
+#info_header
+{
+    box-sizing: border-box;
+    font-weight: bold;
+    color: white;
+    background-color: #e70032;
+    font-size: 6em;
+    text-align: center;
+}
+
+#infoY_text
+{
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+#interpretiereY
+{
+    margin-bottom: 2%;
+}
+
+#wrapperRegistrierung
+{
+    padding-left: 25%;
+    padding-right: 25%;
+
+}
+
+#registrierung
+{
+    box-sizing: border-box;
+    border: 1px solid black;
+}
+
+.verborgeneEntscheidung
+{
+    font-style: italic;
+}
+
+label
+{
+    width: 90em;
+}
+
